@@ -4,16 +4,28 @@
   <input id="input-length" />
 </div>
 <div>
-  <input type="checkbox" id="checkbox-numbers" />
+  <input
+    type="checkbox"
+    id="checkbox-numbers"
+    (change)="onChangeUseNumbers()"
+  />
   <label for="checkbox-numbers">Include Numbers </label> <br />
 </div>
 <div>
-  <input type="checkbox" id="checkbox-characters" />
+  <input
+    type="checkbox"
+    id="checkbox-characters"
+    (change)="onChangeUseCharacters()"
+  />
   <label for="checkbox-characters">Include Characters</label> <br />
 </div>
 <div>
+  <input
+    type="checkbox"
+    id="checkbox-symbols"
+    (change)="onChangeUseSymbols()"
+  />
   <label for="checkbox-symbols">Include Symbols</label> <br />
-  <input type="checkbox" id="checkbox-symbols" />
 </div>
 
 <button (click)="onButtonClick()">Generate!</button>
