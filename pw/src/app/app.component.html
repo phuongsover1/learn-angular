@@ -1,24 +1,24 @@
 <h1>Password Generator</h1>
 <div>
-  <label for="input-length">Enter Length: </label> <br />
-  <input />
-</div>
-<div>
-  <input type="checkbox" id="checkbox-letters" />
-  <label for="checkbox-letters">Use Letters</label>
+  <label for="input-length">Length: </label> <br />
+  <input id="input-length" />
 </div>
 <div>
   <input type="checkbox" id="checkbox-numbers" />
-  <label for="checkbox-numbers">Use Numbers</label>
+  <label for="checkbox-numbers">Include Numbers </label> <br />
 </div>
 <div>
+  <input type="checkbox" id="checkbox-characters" />
+  <label for="checkbox-characters">Include Characters</label> <br />
+</div>
+<div>
+  <label for="checkbox-symbols">Include Symbols</label> <br />
   <input type="checkbox" id="checkbox-symbols" />
-  <label for="checkbox-symbols">Use Symbols</label>
 </div>
 
-<div><button>Generate!</button></div>
+<button (click)="onButtonClick()">Generate!</button>
 
 <div>
-  <label for="password-result">Your Password</label> <br />
-  <input />
+  <label for="input-result">Result: </label><br />
+  <input id="input-result" />
 </div>
