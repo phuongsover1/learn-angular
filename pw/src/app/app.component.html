@@ -1,7 +1,7 @@
 <h1>Password Generator</h1>
 <div>
   <label for="input-length">Length: </label> <br />
-  <input id="input-length" />
+  <input id="input-length" (input)="onInputLength($event)" />
 </div>
 <div>
   <input
