@@ -1,45 +1,65 @@
 <h1>Password Generator</h1>
-<div>
-  <label for="input-length">Length: </label> <br />
-  <input id="input-length" (input)="onInputLength($event)" />
+<div class="field">
+  <label for="input-length" class="label">Length: </label>
+  <div class="control">
+    <input
+      class="input"
+      placeholder="Enter length of password!"
+      id="input-length"
+      (input)="onInputLength($event)"
+    />
+  </div>
 </div>
-<div>
-  <input
-    type="checkbox"
-    id="checkbox-numbers"
-    (change)="onChangeUseNumbers()"
-  />
-  <label for="checkbox-numbers">Include Numbers </label> <br />
-</div>
-<div>
-  <input
-    type="checkbox"
-    id="checkbox-characters"
-    (change)="onChangeUseCharacters()"
-  />
-  <label for="checkbox-characters">Include Characters</label> <br />
-</div>
-<div>
-  <input
-    type="checkbox"
-    id="checkbox-symbols"
-    (change)="onChangeUseSymbols()"
-  />
-  <label for="checkbox-symbols">Include Symbols</label> <br />
+<div class="field">
+  <div class="control">
+    <label for="checkbox-numbers">
+      <input
+        type="checkbox"
+        id="checkbox-numbers"
+        (change)="onChangeUseNumbers()"
+      />
+
+      Include Numbers &nbsp;
+    </label>
+    <label class="checkbox" for="checkbox-characters">
+      <input
+        type="checkbox"
+        id="checkbox-characters"
+        (change)="onChangeUseCharacters()"
+      />
+
+      Include Characters &nbsp;
+    </label>
+    <label class="checkbox" for="checkbox-symbols">
+      <input
+        type="checkbox"
+        id="checkbox-symbols"
+        (change)="onChangeUseSymbols()"
+      />
+      Include Symbols &nbsp;
+    </label>
+  </div>
 </div>
 
-<button
-  [disabled]="
-    !(length && (includeNumbers || includeCharacters || includeSymbols))
-  "
-  (click)="onButtonClick()"
->
-  Generate!
-</button>
+<div class="field">
+  <div class="control">
+    <button
+      class="button is-link"
+      [disabled]="
+        !(length && (includeNumbers || includeCharacters || includeSymbols))
+      "
+      (click)="onButtonClick()"
+    >
+      Generate!
+    </button>
+  </div>
+</div>
 
-<div>
-  <label for="input-result">Result: </label><br />
-  <input id="input-result" [value]="password" />
+<div class="field">
+  <label for="input-result" class="label">Result: </label>
+  <div class="control">
+    <input id="input-result" [value]="password" class="input" />
+  </div>
 </div>
 {{ password }} <br />
 {{ "hello phuong" }} <br />
