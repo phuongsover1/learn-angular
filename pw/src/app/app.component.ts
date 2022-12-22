@@ -6,13 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  includeCharacters: boolean = false;
-  includeNumbers: boolean = false;
-  includeSymbols: boolean = false;
-  length: number = 0;
-  password: string = 'initial password';
+  public includeCharacters: boolean = false;
+  public includeNumbers: boolean = false;
+  public includeSymbols: boolean = false;
+  public length: number = 0;
+  public password: string = '';
 
-  onButtonClick(): void {
+  public onButtonClick(): void {
     const numbers: string = '0123456789';
     const characters: string = 'abcdefghijklmnopqrstuvwyz';
     const symbols: string = '!@#$%^&*()';
@@ -40,7 +40,7 @@ export class AppComponent {
     this.password = generatedPassword;
   }
 
-  onInputLength(event: Event): void {
+  public onInputLength(event: Event): void {
     const target = event.target as HTMLInputElement;
     console.log(`inputLength: ${target.value}`);
     const parseNumber = Number.parseInt(target.value);
@@ -49,19 +49,19 @@ export class AppComponent {
     } else this.length = 0;
   }
 
-  onChangeUseCharacters(): void {
+  public onChangeUseCharacters(): void {
     this.includeCharacters = !this.includeCharacters;
   }
 
-  onChangeUseNumbers(): void {
+  public onChangeUseNumbers(): void {
     this.includeNumbers = !this.includeNumbers;
   }
 
-  onChangeUseSymbols(): void {
+  public onChangeUseSymbols(): void {
     this.includeSymbols = !this.includeSymbols;
   }
 
-  getName(): string {
+  public getName(): string {
     return 'Phuong Nguyen';
   }
 }

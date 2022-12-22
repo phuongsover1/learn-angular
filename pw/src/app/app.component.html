@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <div class="field">
+      <div class="field" *ngIf="password">
         <label for="input-result" class="label">Your Password: </label>
         <div class="control">
           <input id="input-result" [value]="password" class="input" />
