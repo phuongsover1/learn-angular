@@ -28,7 +28,14 @@
   <label for="checkbox-symbols">Include Symbols</label> <br />
 </div>
 
-<button [disabled]="!isEnableBtn" (click)="onButtonClick()">Generate!</button>
+<button
+  [disabled]="
+    !(length && (includeNumbers || includeCharacters || includeSymbols))
+  "
+  (click)="onButtonClick()"
+>
+  Generate!
+</button>
 
 <div>
   <label for="input-result">Result: </label><br />
