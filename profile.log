@@ -1,0 +1,288 @@
+FUNCTION  coc#client#get_channel()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/client.vim:168
+Called 7 times
+Total time:   0.000118
+ Self time:   0.000118
+
+count  total (s)   self (s)
+    7              0.000027   if s:is_vim
+                                return a:client['channel']
+    7              0.000011   endif
+    7              0.000034   return a:client['chan_id']
+
+FUNCTION  coc#util#editor_infos()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/util.vim:436
+Called 2 times
+Total time:   0.002286
+ Self time:   0.002108
+
+count  total (s)   self (s)
+    2              0.000016   let result = []
+    4              0.000045   for info in getwininfo()
+    2   0.000188   0.000046     if !coc#window#is_float(info['winid'])
+    2              0.000011       let bufnr = info['bufnr']
+    2              0.000021       let buftype = getbufvar(bufnr, '&buftype')
+    2              0.000011       if buftype !=# '' && buftype !=# 'acwrite'
+                                    continue
+    2              0.000003       endif
+    2              0.000013       let bufname = bufname(bufnr)
+    2   0.001829   0.001793       call add(result, { 'winid': info['winid'], 'bufnr': bufnr, 'tabid': coc#util#tabnr_id(info['tabnr']), 'fullpath': empty(bufname) ? '' : fnamemodify(bufname, ':p'), })
+    2              0.000011     endif
+    4              0.000015   endfor
+    2              0.000010   return result
+
+FUNCTION  coc#rpc#ready()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/rpc.vim:79
+Called 7 times
+Total time:   0.000166
+ Self time:   0.000166
+
+count  total (s)   self (s)
+    7              0.000088   if empty(s:client) || s:client['running'] == 0
+                                return 0
+    7              0.000013   endif
+    7              0.000023   return 1
+
+FUNCTION  coc#string#character_index()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/string.vim:8
+Called 2 times
+Total time:   0.000025
+ Self time:   0.000025
+
+count  total (s)   self (s)
+    2              0.000013   if a:byteIdx <= 0
+    2              0.000006     return 0
+                              endif
+                              let i = 0
+                              for char in split(strpart(a:line, 0, a:byteIdx), '\zs')
+                                let i += char2nr(char) > 65535 ? 2 : 1
+                              endfor
+                              return i
+
+FUNCTION  coc#window#is_float()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/window.vim:95
+Called 2 times
+Total time:   0.000142
+ Self time:   0.000142
+
+count  total (s)   self (s)
+    2              0.000008   if s:is_vim
+                                if exists('*popup_list')
+                                  return index(popup_list(), a:winid) != -1
+                                else
+                                  try
+                                    return !empty(popup_getpos(a:winid))
+                                  catch /^Vim\%((\a\+)\)\=:E993/
+                                    return 0
+                                  endtry
+                                endif
+                                return 0
+    2              0.000003   else
+    2              0.000028     let config = nvim_win_get_config(a:winid)
+    2              0.000027     return !empty(config) && !empty(get(config, 'relative', ''))
+                              endif
+
+FUNCTION  CocActionAsync()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/plugin/coc.vim:106
+Called 2 times
+Total time:   0.000695
+ Self time:   0.000057
+
+count  total (s)   self (s)
+    2   0.000691   0.000053   return s:AsyncRequest(a:name, a:000)
+
+FUNCTION  coc#float#check_related()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/float.vim:749
+Called 2 times
+Total time:   0.000414
+ Self time:   0.000147
+
+count  total (s)   self (s)
+    2              0.000010   let invalids = []
+    2   0.000315   0.000048   let ids = coc#float#get_float_win_list(1)
+    2              0.000009   for id in ids
+                                let target = getwinvar(id, 'target_winid', 0)
+                                if target && index(ids, target) == -1
+                                  call add(invalids, id)
+                                endif
+    2              0.000005   endfor
+    2              0.000008   if s:is_vim && !s:popup_list_api
+                                let s:popup_list = filter(ids, "index(invalids, v:val) == -1")
+    2              0.000002   endif
+    2              0.000007   for id in invalids
+                                call coc#float#close(id)
+    2              0.000003   endfor
+
+FUNCTION  <SNR>32_notify()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/client.vim:212
+Called 7 times
+Total time:   0.001345
+ Self time:   0.001227
+
+count  total (s)   self (s)
+    7   0.000306   0.000188   let channel = coc#client#get_channel(self)
+    7              0.000034   if empty(channel)
+                                return ''
+    7              0.000009   endif
+    7              0.000019   try
+    7              0.000018     if s:is_vim
+                                  call ch_sendraw(channel, json_encode([0, [a:method, a:args]])."\n")
+    7              0.000013     else
+    7              0.000325       call call('rpcnotify', [channel, a:method] + a:args)
+    7              0.000018     endif
+                              catch /.*/
+                                if v:exception =~# 'E475'
+                                  if get(g:, 'coc_vim_leaving', 0)
+                                    return
+                                  endif
+                                  echohl Error | echom '['.self.name.'] server connection lost' | echohl None
+                                  let name = self.name
+                                  call s:on_exit(name, 0)
+                                  execute 'silent do User ConnectionLost'.toupper(name[0]).name[1:]
+                                elseif v:exception =~# 'E12'
+                                  " neovim's bug, ignore it
+                                else
+                                  echohl Error | echo 'Error on notify ('.a:method.'): '.v:exception | echohl None
+                                endif
+    7              0.000017   endtry
+
+FUNCTION  coc#rpc#notify()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/rpc.vim:183
+Called 7 times
+Total time:   0.001868
+ Self time:   0.000358
+
+count  total (s)   self (s)
+    7   0.000268   0.000102   if !coc#rpc#ready()
+                                return ''
+    7              0.000010   endif
+    7   0.001533   0.000188   call s:client['notify'](a:method, a:args)
+    7              0.000021   return ''
+
+FUNCTION  coc#util#get_loaded_bufs()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/util.vim:432
+Called 2 times
+Total time:   0.000100
+ Self time:   0.000100
+
+count  total (s)   self (s)
+    2              0.000094   return map(getbufinfo({'bufloaded': 1}),'v:val["bufnr"]')
+
+FUNCTION  <SNR>29_Autocmd()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/plugin/coc.vim:278
+Called 5 times
+Total time:   0.001620
+ Self time:   0.000227
+
+count  total (s)   self (s)
+    5              0.000084   if !get(g:, 'coc_workspace_initialized', 0)
+                                return
+    5              0.000011   endif
+    5   0.001489   0.000096   call coc#rpc#notify('CocAutocmd', a:000)
+
+FUNCTION  coc#util#tabnr_id()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/util.vim:428
+Called 2 times
+Total time:   0.000036
+ Self time:   0.000036
+
+count  total (s)   self (s)
+    2              0.000034   return s:is_vim ? coc#api#get_tabid(a:tabnr) : nvim_list_tabpages()[a:tabnr - 1]
+
+FUNCTION  coc#float#get_float_win_list()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/float.vim:570
+Called 2 times
+Total time:   0.000267
+ Self time:   0.000267
+
+count  total (s)   self (s)
+    2              0.000007   let res = []
+    2              0.000018   let list_all = get(a:, 1, 0)
+    2              0.000006   if s:is_vim
+                                if s:popup_list_api
+                                  return filter(popup_list(), 'popup_getpos(v:val)["visible"]'.(list_all ? '' : '&& getwinvar(v:val, "float", 0)'))
+                                endif
+                                return filter(s:popup_list, 's:popup_visible(v:val)')
+    2              0.000003   else
+    2              0.000007     let res = []
+    4              0.000031     for i in range(1, winnr('$'))
+    2              0.000013       let id = win_getid(i)
+    2              0.000032       let config = nvim_win_get_config(id)
+    2              0.000018       if empty(config) || empty(config['relative'])
+    2              0.000007         continue
+                                  endif
+                                  " ignore border & button window & others
+                                  if list_all == 0 && !getwinvar(id, 'float', 0)
+                                    continue
+                                  endif
+                                  call add(res, id)
+    2              0.000006     endfor
+    2              0.000008     return res
+                              endif
+                              return []
+
+FUNCTION  coc#cursor#position()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/autoload/coc/cursor.vim:16
+Called 2 times
+Total time:   0.000128
+ Self time:   0.000103
+
+count  total (s)   self (s)
+    2              0.000036   let line = getline('.')
+    2   0.000086   0.000061   return [line('.') - 1, coc#string#character_index(line, col('.') - 1)]
+
+FUNCTION  <SNR>29_AsyncRequest()
+    Defined: ~/.local/share/nvim/site/pack/packer/start/coc.nvim/plugin/coc.vim:141
+Called 2 times
+Total time:   0.000638
+ Self time:   0.000163
+
+count  total (s)   self (s)
+    2              0.000046   let Cb = empty(a:args)? v:null : a:args[len(a:args) - 1]
+    2              0.000017   if type(Cb) == 2
+                                if !coc#rpc#ready()
+                                  call Cb('service not started', v:null)
+                                else
+                                  call coc#rpc#request_async(a:name, a:args[0:-2], Cb)
+                                endif
+                                return ''
+    2              0.000003   endif
+    2   0.000514   0.000039   call coc#rpc#notify(a:name, a:args)
+    2              0.000004   return ''
+
+FUNCTIONS SORTED ON TOTAL TIME
+count  total (s)   self (s)  function
+    2   0.002286   0.002108  coc#util#editor_infos()
+    7   0.001868   0.000358  coc#rpc#notify()
+    5   0.001620   0.000227  <SNR>29_Autocmd()
+    7   0.001345   0.001227  <SNR>32_notify()
+    2   0.000695   0.000057  CocActionAsync()
+    2   0.000638   0.000163  <SNR>29_AsyncRequest()
+    2   0.000414   0.000147  coc#float#check_related()
+    2   0.000267             coc#float#get_float_win_list()
+    7   0.000166             coc#rpc#ready()
+    2   0.000142             coc#window#is_float()
+    2   0.000128   0.000103  coc#cursor#position()
+    7   0.000118             coc#client#get_channel()
+    2   0.000100             coc#util#get_loaded_bufs()
+    2   0.000036             coc#util#tabnr_id()
+    2   0.000025             coc#string#character_index()
+
+FUNCTIONS SORTED ON SELF TIME
+count  total (s)   self (s)  function
+    2   0.002286   0.002108  coc#util#editor_infos()
+    7   0.001345   0.001227  <SNR>32_notify()
+    7   0.001868   0.000358  coc#rpc#notify()
+    2              0.000267  coc#float#get_float_win_list()
+    5   0.001620   0.000227  <SNR>29_Autocmd()
+    7              0.000166  coc#rpc#ready()
+    2   0.000638   0.000163  <SNR>29_AsyncRequest()
+    2   0.000414   0.000147  coc#float#check_related()
+    2              0.000142  coc#window#is_float()
+    7              0.000118  coc#client#get_channel()
+    2   0.000128   0.000103  coc#cursor#position()
+    2              0.000100  coc#util#get_loaded_bufs()
+    2   0.000695   0.000057  CocActionAsync()
+    2              0.000036  coc#util#tabnr_id()
+    2              0.000025  coc#string#character_index()
+
