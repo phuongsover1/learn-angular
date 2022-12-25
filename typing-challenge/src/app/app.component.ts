@@ -8,7 +8,6 @@ import { faker } from '@faker-js/faker';
 })
 export class AppComponent {
   title: string = 'typing-challenge';
-  length: number = 10;
   randomText: string = faker.lorem.paragraph();
   isSuccess: boolean = false;
 
