@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="columns is-mobile has-text-centered mt-6">
+    <div class="column is-three-fifths is-offset-one-fifth card">
+      <h1 class="title mb-6">Typing Challenge</h1>
+      <p class="random-text mb-5 is-size-3">{{ randomText }}</p>
+      <div class="field">
+        <div class="control columns is-mobile">
+          <div class="column">
+            <input
+              class="input column"
+              type="text"
+              placeholder="Typing here!"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="field my-5">
+        <button class="button is-primary" (click)="generateRandomText()">
+          Regenerate Random Text
+        </button>
+      </div>
+
+      <p class="announcement my-5 is-size-1" *ngIf="isSuccess">You win!</p>
+    </div>
+  </div>
+</div>
