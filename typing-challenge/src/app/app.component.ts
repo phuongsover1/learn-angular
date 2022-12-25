@@ -8,10 +8,10 @@ import { faker } from '@faker-js/faker';
 })
 export class AppComponent {
   title: string = 'typing-challenge';
-  randomText: string = faker.lorem.paragraph();
+  randomText: string = faker.lorem.sentence();
   isSuccess: boolean = false;
 
   public generateRandomText(): void {
-    this.randomText = faker.lorem.paragraph();
+    this.randomText = faker.lorem.sentence();
   }
 }
