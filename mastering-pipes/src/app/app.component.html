@@ -38,4 +38,23 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="amount">Amount</label><br />
+      <input
+        type="number"
+        id="amount"
+        class="form-control"
+        name=""
+        value=""
+        (input)="onAmountChange($event)"
+      />
+    </div>
+    <div class="col">
+      <label for=""><b>Amount</b></label>
+      <div>
+        {{ amount | currency : "VND" }}
+      </div>
+    </div>
+  </div>
 </div>
