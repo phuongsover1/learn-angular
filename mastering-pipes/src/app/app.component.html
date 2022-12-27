@@ -19,4 +19,23 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="name">Payment Date</label><br />
+      <input
+        type="date"
+        id="date"
+        class="form-control"
+        name=""
+        value=""
+        (input)="onDateChange($event)"
+      />
+    </div>
+    <div class="col">
+      <label for=""><b>Payment Date</b></label>
+      <div>
+        {{ date }}
+      </div>
+    </div>
+  </div>
 </div>
