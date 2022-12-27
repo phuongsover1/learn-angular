@@ -2,7 +2,14 @@
   <div class="columns is-mobile has-text-centered mt-6">
     <div class="column is-three-fifths is-offset-one-fifth card">
       <h1 class="title mb-6">Typing Challenge</h1>
-      <p class="random-text mb-5 is-size-3">{{ randomText }}</p>
+      <p class="random-text mb-5 is-size-3 gray" *ngIf="reset">
+        {{ randomText }}
+      </p>
+      <p class="random-text mb-5 is-size-3" *ngIf="!reset">
+        <span *ngFor="let item of checkCharacterList" [ngClass]="item.color">{{
+          item.character
+        }}</span>
+      </p>
       <div class="field">
         <div class="control columns is-mobile">
           <div class="column">
