@@ -57,4 +57,23 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="amount">Height</label><br />
+      <input
+        type="text"
+        id="amount"
+        class="form-control"
+        (input)="onHeightChange($event)"
+      />
+    </div>
+    <div class="col">
+      <label for=""><b>Height</b></label>
+      <div>
+        {{ height | number : "1.0-2" }}
+      </div>
+    </div>
+  </div>
 </div>
+
+{{ car | json }}

@@ -10,6 +10,13 @@ export class AppComponent {
   name: string = '';
   date: string = '';
   amount: number = 0;
+  height: number = 0;
+
+  car = {
+    make: 'Toyota',
+    model: 'Camry',
+    year: 2000,
+  };
 
   onNameChange(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -24,5 +31,10 @@ export class AppComponent {
   onAmountChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.amount = Number.parseFloat(target.value);
+  }
+
+  onHeightChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.height = Number.parseFloat(target.value);
   }
 }
