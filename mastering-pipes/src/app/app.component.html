@@ -1,17 +1,11 @@
 <div class="container">
   <h2>Payment Form</h2>
   <div class="row">
-    <div class="form-group col">
+    <div class="form-group col" *ngI>
       <label for="name">Payee Name</label><br />
-      <input
-        type="text"
-        id="name"
-        class="form-control"
-        name=""
-        value=""
-        (input)="onNameChange($event)"
-      />
+      <input type="text" id="name" class="form-control" name="" value="" (input)="onNameChange($event)" />
     </div>
+
     <div class="col">
       <label for=""><b>Name</b></label>
       <div>
@@ -19,17 +13,11 @@
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="form-group col">
       <label for="name">Payment Date</label><br />
-      <input
-        type="date"
-        id="date"
-        class="form-control"
-        name=""
-        value=""
-        (input)="onDateChange($event)"
-      />
+      <input type="date" id="date" class="form-control" name="" value="" (input)="onDateChange($event)" />
     </div>
     <div class="col">
       <label for=""><b>Payment Date</b></label>
@@ -41,14 +29,7 @@
   <div class="row">
     <div class="form-group col">
       <label for="amount">Amount</label><br />
-      <input
-        type="number"
-        id="amount"
-        class="form-control"
-        name=""
-        value=""
-        (input)="onAmountChange($event)"
-      />
+      <input type="number" id="amount" class="form-control" name="" value="" (input)="onAmountChange($event)" />
     </div>
     <div class="col">
       <label for=""><b>Amount</b></label>
@@ -60,12 +41,7 @@
   <div class="row">
     <div class="form-group col">
       <label for="amount">Height</label><br />
-      <input
-        type="text"
-        id="amount"
-        class="form-control"
-        (input)="onHeightChange($event)"
-      />
+      <input type="text" id="amount" class="form-control" (input)="onHeightChange($event)" />
     </div>
     <div class="col">
       <label for=""><b>Height</b></label>
@@ -77,12 +53,7 @@
   <div class="row">
     <div class="form-group col">
       <label for="miles">Miles</label><br />
-      <input
-        type="text"
-        id="miles"
-        class="form-control"
-        (input)="onMilesChange($event)"
-      />
+      <input type="text" id="miles" class="form-control" (input)="onMilesChange($event)" />
     </div>
     <div class="col">
       <label for=""><b>Kilometers</b></label>
