@@ -4,10 +4,23 @@ import {Pipe, PipeTransform} from '@angular/core';
   name: 'convert',
 })
 export class ConvertPipe implements PipeTransform {
-  transform(value: unknown, ...args: unknown[]): string | number | undefined {
-    console.log(args);
+  transform(value: unknown, targetUnits?: string): string | number | undefined {
+    console.log(targetUnits);
     if (!value) return '';
-    if (typeof value === 'number' && !isNaN(value)) return 1.609344 * value;
+    if (typeof value === 'number' && !isNaN(value)) {
+      if (!targetUnits)
+        targetUnits = 'k';
+      switch (targetUnits) {
+        case 'm':
+          return 1.609344 * value * 100;
+        case 'cm':
+          return 1.609344 * value * 100 * 1000;
+        case 'k':
+          return 1.609344 * value;
+        default:
+          return 'Please passing the valid targetUnits.';
+      }
+    }
     return undefined;
   }
 }
