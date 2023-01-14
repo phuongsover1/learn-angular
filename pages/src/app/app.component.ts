@@ -13,7 +13,7 @@ interface Image {
 
 export class AppComponent {
   title = 'pages';
-  currentPage: number = 0;
+  currentPage: number = 3;
   images: Image[] = [
     {
       title: 'At the Beach',
