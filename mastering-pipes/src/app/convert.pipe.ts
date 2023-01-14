@@ -4,9 +4,7 @@ import {Pipe, PipeTransform} from '@angular/core';
   name: 'convert',
 })
 export class ConvertPipe implements PipeTransform {
-  transform(value: unknown, targetUnits?: string): string | number | undefined {
-    console.log(targetUnits);
-    if (!value) return '';
+  transform(value: unknown, targetUnits?: string): string | number {
     if (typeof value === 'number' && !isNaN(value)) {
       if (!targetUnits)
         targetUnits = 'k';
@@ -21,6 +19,6 @@ export class ConvertPipe implements PipeTransform {
           return 'Please passing the valid targetUnits.';
       }
     }
-    return undefined;
+    return ''
   }
 }

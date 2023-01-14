@@ -11,7 +11,7 @@ export class AppComponent {
   date: string = '';
   amount: number = 0;
   height: number = 0;
-  miles: number | undefined;
+  miles: number = 0;
 
   car = {
     make: 'Toyota',
