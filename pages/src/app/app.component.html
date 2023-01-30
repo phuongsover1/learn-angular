@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <nav aria-label="...">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-center" appClass>
       <li class="page-item" [ngClass]="{disabled: currentPage === 0}">
         <span class="page-link" (click)="currentPage = currentPage - 1">Previous</span>
       </li>
@@ -15,19 +15,8 @@
     </ul>
   </nav>
 
-  <!-- <div class="text-center"> -->
-  <!--   <h4>{{images[currentPage].title}}</h4> -->
-  <!--   <img [src]="images[currentPage].url"> -->
-  <!-- </div> -->
-  <div [ngSwitch]="currentPage">
-    <div *ngSwitchCase="0">
-      Current page is zero
-    </div>
-    <div *ngSwitchCase="1">
-      Current page is one
-    </div>
-    <div *ngSwitchDefault>
-      Unknown page !
-    </div>
+  <div class="text-center">
+    <h4 appClass>{{images[currentPage].title}}</h4>
+    <img [src]="images[currentPage].url">
   </div>
 </div>
