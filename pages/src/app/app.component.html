@@ -15,8 +15,19 @@
     </ul>
   </nav>
 
-  <div class="text-center">
-    <h4>{{images[currentPage].title}}</h4>
-    <img [src]="images[currentPage].url">
+  <!-- <div class="text-center"> -->
+  <!--   <h4>{{images[currentPage].title}}</h4> -->
+  <!--   <img [src]="images[currentPage].url"> -->
+  <!-- </div> -->
+  <div [ngSwitch]="currentPage">
+    <div *ngSwitchCase="0">
+      Current page is zero
+    </div>
+    <div *ngSwitchCase="1">
+      Current page is one
+    </div>
+    <div *ngSwitchDefault>
+      Unknown page !
+    </div>
   </div>
 </div>
