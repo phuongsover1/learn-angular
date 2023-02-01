@@ -14,7 +14,9 @@ export class TimesDirective {
 
     console.log(times)
     for (let i = 0; i < times; ++i) {
-      this.viewContainer.createEmbeddedView(this.templateRef, {});
+      this.viewContainer.createEmbeddedView(this.templateRef, {
+        index: i,
+      });
     }
   }
 }
