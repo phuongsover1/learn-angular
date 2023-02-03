@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-title-divider',
@@ -6,5 +6,4 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./title-divider.component.css']
 })
 export class TitleDividerComponent {
-  @Input() title: string = '';
 }
