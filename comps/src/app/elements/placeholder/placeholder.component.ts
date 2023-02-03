@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-placeholder',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./placeholder.component.css']
 })
 export class PlaceholderComponent {
-
+  @Input() header: boolean = true;
+  @Input() lines: number = 3;
 }
